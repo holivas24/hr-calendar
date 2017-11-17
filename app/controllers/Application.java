@@ -35,9 +35,9 @@ public class Application extends Controller {
     
     public static void crearUsuario()
     {
-    	List<Campus> campuses = Campus.findAll();
+    	List<Sucursal> sucursales = Sucursal.findAll();
     	List<Nivel> niveles = Nivel.findAll();
-    	render(campuses,niveles);
+    	render(sucursales,niveles);
     }
     
     public static void usuariosPuntos()
@@ -47,9 +47,9 @@ public class Application extends Controller {
     }
         
     
-    public static void newUser(String nombre, String apellido, String password, int nivel, Long campus)
+    public static void newUser(String nombre, String apellido, String password, int nivel, Long sucursal)
     {
-    	Usuario user = new Usuario(nombre,apellido,password,nivel,campus);    	
+    	Usuario user = new Usuario(nombre,apellido,password,nivel,sucursal);    	
     	render(user);
     }
     
@@ -72,10 +72,10 @@ public class Application extends Controller {
     	renderJSON(user);
     }
     
-    public static void newCampus(String nombre)
+    public static void newsucursal(String nombre)
     {
-    	Campus campus = new Campus(nombre);
-    	renderJSON(campus);
+    	Sucursal sucursal = new Sucursal(nombre);
+    	renderJSON(sucursal);
     }
     
     public static void newLevel(String nombre, int numero)
@@ -91,13 +91,13 @@ public class Application extends Controller {
     }
     
         
-    public static void modificarUsuario(Long id,String nombre, String apellido, String nivel, String campus)
+    public static void modificarUsuario(Long id,String nombre, String apellido, String nivel, String sucursal)
     {
     	Usuario user = Usuario.findById(id);
     	user.nombre = nombre;
     	user.apellido = apellido;
     	user.nivel = Nivel.find("nombre = ?1", nivel).first();
-    	user.campus = Campus.find("nombre = ?1",campus).first();
+    	user.sucursal = Sucursal.find("nombre = ?1",sucursal).first();
     	user.save();
     	renderJSON(user);    	
     }
@@ -113,14 +113,6 @@ public class Application extends Controller {
     {
     	Usuario user = Usuario.findById(id);
     	render(user);
-    }
-    
-    public static void sumarPuntos(Long id)
-    {
-    	Usuario heroe = Usuario.findById(id);
-    	Usuario admin = getUser();
-    	heroe.sumarPuntos(10, "Asignacion regular", admin);
-    	renderJSON(heroe);    	
     }
     
     public static void registros()
@@ -140,15 +132,6 @@ public class Application extends Controller {
     {
     	Registros registro = Registros.findById(id);
     	render(registro);
-    }
-    
-    public static void eliminarRegistro(Long id)
-    {
-    	Registros registro = Registros.findById(id);
-    	Usuario user = Usuario.findById(registro.hero.id);
-    	user.restarPuntos(registro.cantidad, registro.id);
-    	renderJSON(registro);
-    	
     }
     
     public static void autoEditar()

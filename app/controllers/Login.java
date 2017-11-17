@@ -50,14 +50,14 @@ public class Login extends Controller{
 		case 1://Superusuario
 			Application.index();
 			break;
-		case 2://Administrador global
-			AdminGlobal.index();
-			break;
-		case 3://Administrador de campus
-			AdminCampus.index();
-			break;
-		case 4://Usuario
-		case 5://Heroe
+//		case 2://Administrador global
+//			AdminGlobal.index();
+//			break;
+//		case 3://Administrador de campus
+//			AdminCampus.index();
+//			break;
+//		case 4://Usuario
+//		case 5://Heroe
 		default:
 			Login.logout();
 		}

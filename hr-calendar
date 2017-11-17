@@ -5,9 +5,9 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-APP_NAME="herocash"
+APP_NAME="hrcalendar"
 APP_PATH=/opt/play/play
-APP_LOCATION=/opt/hero-cash
+APP_LOCATION=/opt/hr-calendar
 PID_FILE=$APP_LOCATION/RUNNING_PID
 PORT=9000
 

@@ -16,7 +16,7 @@ body {
 
  #wrapper {
     width: 100%;
-    background:#1C1C1C;
+    background:#000000;
 }
 
 #page-wrapper {
@@ -241,7 +241,7 @@ margin:0px;
 color: #fff;
 width: 260px;
 text-align: left;
-height: 110px;
+height: 80px;/*Altura de top navbar*/
 font-size: 30px;
 font-weight: 700;
 text-transform: uppercase;
@@ -350,7 +350,7 @@ background: #172D44;
 	
 }
 .top-navbar {
-	background:#1C1C1C;
+	background:#000000;
 	border-bottom:none;
 	
 }
@@ -369,7 +369,7 @@ border:0px solid black;
      
 }
 .navbar-header {
-    background: #1C1C1C;
+    background: #z;
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
 background-color: #B40101;

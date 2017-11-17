@@ -4,11 +4,11 @@ import javax.persistence.Entity;
 import play.db.jpa.Model;
 
 @Entity
-public class Campus extends Model{
+public class Sucursal extends Model{
 	
 	public String nombre;
 	
-	public Campus(String nombre)
+	public Sucursal(String nombre)
 	{
 		this.nombre = nombre;
 		this.save();

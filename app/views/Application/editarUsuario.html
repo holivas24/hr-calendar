@@ -24,8 +24,8 @@
 						<td><a href="#" id="usuarioNivel" data-type="select" data-title="Introduzca Nivel" >${user.nivel.nombre}</a></td>
 					</tr>
 					<tr>
-						<td>Campus:</td>
-						<td><a href="#" id="usuarioCampus" data-type="select" data-title="Introduzca Campus">${user.campus.nombre}</a></td>
+						<td>sucursal:</td>
+						<td><a href="#" id="usuariosucursal" data-type="select" data-title="Introduzca sucursal">${user.sucursal.nombre}</a></td>
 					</tr>
 					<tr>
 						<td><button class="btn btn-success" onClick="guardarCambios()"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar cambios</button></td>
@@ -56,12 +56,12 @@
         source: [
               {value: 1, text: 'Superusuario'},
               {value: 2, text: 'Administrador Global'},
-              {value: 3, text: 'Administrador de Campus'},
+              {value: 3, text: 'Administrador de sucursal'},
               {value: 4, text: 'Usuario'},
               {value: 5, text: 'Heroe'}
            ]});
 
-		$('#usuarioCampus').editable({
+		$('#usuariosucursal').editable({
 		source:[
 			{value:1, text:'East'},
 			{value:2, text:'Northeast'},
@@ -77,10 +77,10 @@
 		var nombre= $('#usuarioNombre').text(),
 			apellido = $('#usuarioApellido').text(),
 			nivel = $('#usuarioNivel').text(),
-			campus = $('#usuarioCampus').text();
+			sucursal = $('#usuariosucursal').text();
 
 			var link = '/Application/modificarUsuario?nombre='+nombre+'&apellido='+apellido+
-						'&nivel='+nivel+'&campus='+campus+'&id=${user.id}';
+						'&nivel='+nivel+'&sucursal='+sucursal+'&id=${user.id}';
 			$.get(link,function(){
 				alert("Modificado exitosamente");
 			});
