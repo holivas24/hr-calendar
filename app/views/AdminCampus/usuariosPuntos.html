@@ -1,0 +1,47 @@
+#{extends 'admincampus.html' /}
+#{set title:'Puntos' /}
+
+<div class="table-responsive"> 
+<table id="tableUsuarios" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Campus</th>
+                <th>Nivel</th>
+                <th>Puntos</th>
+        		<th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+        	#{list usuarios, as:'e'}
+				<tr>
+					<td>${e.nombre}</td>
+                    <td>${e.apellido}</td>
+                    <td>${e.campus.nombre}</td>
+                    <th>${e.nivel.nombre}</th>
+                    <td>${e.puntos}</td>
+                    <td><a class="btn btn-success" href="/AdminCampus/editarPuntos?id=${e.id}">Asignar puntos</a></td>
+				</tr>
+			#{/list}
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Campus</th>
+                <th>Nivel</th>
+                <th>Puntos</th>
+        		<th></th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<script>
+	$(document).ready(function()
+	{
+		 $('#tableUsuarios').DataTable();		
+	});
+</script>

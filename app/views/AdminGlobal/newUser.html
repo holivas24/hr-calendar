@@ -1,0 +1,15 @@
+#{extends 'adminglobal.html' /}
+#{set title:'Usuario creado' /}
+
+<center>
+<div class="jumbotron">
+  <h3>El usuario ${user.nombre} ${user.apellido} ha sido creado correctamente con el nombre de usuario <strong>${user.username}</strong></h3>      
+</div>
+
+<div class="container">
+
+  <a class="btn btn-lg btn-success" href="/AdminGlobal/crearUsuario">Crear otro usuario</a>
+  <a class="btn btn-lg btn-danger" href="/AdminGlobal/index">Volver al inicio</a> 
+  
+</div>
+</center>

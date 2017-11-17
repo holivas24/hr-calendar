@@ -1,0 +1,27 @@
+#{extends 'adminglobal.html' /}
+#{set title:'Eliminar Registro' /}
+
+<center>
+<div class="jumbotron">
+  <h2>Desea eliminar el registro con ID ${registro.id} del heroe <strong>${registro.hero.nombre} ${registro.hero.apellido}</strong> con fecha del dia ${registro.fecha} para el cual se restarian <strong>${registro.cantidad} puntos</strong></h2>      
+</div>
+
+<div class="container">
+
+  <a class="btn btn-lg btn-danger" onClick="eliminarUsuario()" href="#">Eliminar registro</a>
+  <a class="btn btn-lg btn-success" href="/AdminGlobal/detalleRegistro?id=${registro.id}">Volver a detalles del registro</a> 
+  
+</div>
+</center>
+<script>
+	function eliminarUsuario()
+	{
+		$.get('/AdminGlobal/eliminarRegistro?id=${registro.id}',function(response)
+			{
+				alert("Se eliminado el registro "+response.id+" del heroe "+response.hero.nombre+" "+response.hero.apellido+" y se han restado "+response.cantidad+" puntos");
+			});
+
+		window.location ="/AdminGlobal/registros";
+	}
+
+</script>

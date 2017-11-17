@@ -1,0 +1,84 @@
+#{extends 'admincampus.html' /}
+#{set title:'Editar usuario' /}
+ <div class="col-md-12">
+ <!--   Basic Table  -->
+<div class="panel panel-default">
+    <div class="panel-body">
+		<div class="table-responsive"> 
+			<table id="tablaUsuario" class="table" cellspacing="0" width="100%">
+				<thead>
+					<th>Datos:</th>
+					<th></th>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Nombre:</td>
+						<td ><a href="#" id="usuarioNombre" data-type="text" data-title="Introduzca nombre" class="editable">${user.nombre}</a></td>
+					</tr>
+					<tr>
+						<td>Apellido:</td>
+						<td><a href="#" id="usuarioApellido" data-type="text" data-title="Introduzca Apellido" class="editable">${user.apellido}</a></td>
+					</tr>
+					<tr>
+						<td><button class="btn btn-success" onClick="guardarCambios()"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar cambios</button></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		<div>
+	</div>	
+</div>	
+ <div class="row">
+ 	<div class="col-md-12">
+        Nueva contraseña:
+        <input type="password" id="newPass1" class="form-control">
+        Volver a escribir contraseña:
+        <input type="password" id="newPass2" class="form-control">
+        <br>
+        <button onClick="cambiarContrasena()" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Cambiar Contraseña</button><br><br>
+        <a href="/AdminCampus/removeUser?id=${user.id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar usuario</a>
+    </div>
+    </div>
+</div>
+<script>
+	$(document).ready(function(){
+		
+		$('.editable').editable();
+	});
+
+	function guardarCambios()
+	{
+		var nombre= $('#usuarioNombre').text(),
+			apellido = $('#usuarioApellido').text();
+
+			var link = '/AdminCampus/modificarUsuario?nombre='+nombre+'&apellido='+apellido;
+			$.get(link,function(){
+				alert("Modificado exitosamente");
+			});
+
+			location.reload();
+
+	}
+
+	function cambiarContrasena()
+    {
+        var pass1 = $('#newPass1').val(),
+            pass2 = $('#newPass2').val();
+            if(pass1 == pass2)
+            {
+                $.get('/AdminCampus/cambiarPass?id=${user.id}&newpass='+pass1,function(){
+                    
+                });
+                alert("Se ha cambiado contraseña");
+                $('#newPass1').val("");
+                $('#newPass2').val("");
+                
+            } 
+            else
+            {
+                $('#newPass1').val("");
+                $('#newPass2').val("");
+                alert("Las contraseñas no coinciden");
+            }
+    }
+</script>

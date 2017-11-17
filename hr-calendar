@@ -1,0 +1,97 @@
+#!/bin/bash
+
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 1>&2
+   exit 1
+fi
+
+APP_NAME="herocash"
+APP_PATH=/opt/play/play
+APP_LOCATION=/opt/hero-cash
+PID_FILE=$APP_LOCATION/RUNNING_PID
+PORT=9000
+
+function stopServer() {
+  echo "Stopping $APP_NAME ..."
+  if [ -e $PID_FILE ]
+  then
+    kill -15 `cat $PID_FILE`
+    rm -f $PID_FILE
+  else
+      echo "$APP_NAME is not running"
+  fi
+}
+
+function startServer() {
+        if [ -e $PID_FILE ]
+        then
+                echo "PID File exists at $PID_FILE"
+                pid=`cat $PID_FILE`
+                if ps -p $pid > /dev/null
+                then
+                        echo "And server is already running with PID: $pid"
+                        exit 1
+                else
+                        rm -f $PID_FILE
+                fi
+        fi
+        echo "Starting $APP_NAME..."
+        nohup $APP_PATH run $APP_LOCATION >> $APP_LOCATION/$APP_NAME.log &
+        APP_PID=$!
+        echo $APP_PID > $PID_FILE
+        echo $APP_PID
+        exit 0
+
+}
+
+function checkStatus() {
+        if [ -e $PID_FILE ]
+        then
+                pid=`cat $PID_FILE`
+                if ps -p $pid > /dev/null
+                then
+                        echo "$APP_NAME is running with PID: $pid"
+                        exit 0
+                fi
+        fi
+        echo "$APP_NAME is not running"
+}
+
+function logFile(){
+    cat $APP_LOCATION/$APP_NAME.log
+    exit 0
+
+}
+
+function showStatus(){
+  tail -f $APP_LOCATION/$APP_NAME.log  
+}
+
+case $1 in
+  start)
+        startServer
+        ;;
+  restart)
+        echo "Restarting $APP_NAME"
+        stopServer
+        startServer
+        ;;
+  stop)
+        stopServer
+        ;;
+  status)
+        checkStatus
+        ;;
+  log)
+        logFile
+        ;;
+  actual)
+        showStatus
+        ;;
+  *)
+        echo "Usage: $APP_NAME {start|restart|stop|status|log|actual}"
+        exit 1
+        ;;
+esac
+
+exit 0
