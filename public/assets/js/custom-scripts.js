@@ -36,3 +36,31 @@
     });
 
 }(jQuery));
+
+
+function addZero(i) 
+{
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+function obtenerHora()
+{
+    var d = new Date();
+    var h = addZero(d.getHours());
+    var m = addZero(d.getMinutes());
+    var s = addZero(d.getSeconds());
+    
+    return (h + ":" + m + ":" + s);
+}
+
+function obtenerFecha()
+{
+    var currentdate = new Date(); 
+    var datetime = currentdate.getFullYear()+"-"+
+                   addZero((currentdate.getMonth()+1))+"-"+
+                   addZero(currentdate.getDate());
+    return datetime;
+}

@@ -27,6 +27,14 @@
 						<td>sucursal:</td>
 						<td><a href="#" id="usuariosucursal" data-type="select" data-title="Introduzca sucursal">${user.sucursal.nombre}</a></td>
 					</tr>
+					<tr>         
+                        <td>Fecha de Nacimiento</td>
+                        <td><a href="#" id="fechaNac" data-type="date" data-title="Fecha de Nacimiento" class="editable">${user.fecNac}</a></td>
+                    </tr> 
+                    <tr>         
+                        <td>Fecha de Ingreso</td>
+                        <td><a href="#" id="fechaIng" data-type="date" data-title="Fecha de Ingreso" class="editable">${user.fecIng}</a></td>
+                    </tr> 
 					<tr>
 						<td><button class="btn btn-success" onClick="guardarCambios()"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar cambios</button></td>
 						<td></td>
@@ -54,19 +62,19 @@
 
 		$('#usuarioNivel').editable({    
         source: [
-              {value: 1, text: 'Superusuario'},
-              {value: 2, text: 'Administrador Global'},
-              {value: 3, text: 'Administrador de sucursal'},
-              {value: 4, text: 'Usuario'},
-              {value: 5, text: 'Heroe'}
+              {value: 1, text: 'Empleado'},
+              {value: 2, text: 'Administrador'}
            ]});
 
 		$('#usuariosucursal').editable({
 		source:[
-			{value:1, text:'East'},
-			{value:2, text:'Northeast'},
-			{value:3, text:'West'},
-			{value:4, text:'Chihuahua'}
+			{value:1, text:'Chihuahua'},
+			{value:2, text:'Juárez'},
+			{value:3, text:'Tijuana'},
+			{value:4, text:'Guaymas'},
+			{value:5, text:'Hermosillo'},
+			{value:6, text:'Mexicali'},
+			{value:7, text:'Nogales'}
 		]});
 
 		$('.editable').editable();
@@ -77,11 +85,14 @@
 		var nombre= $('#usuarioNombre').text(),
 			apellido = $('#usuarioApellido').text(),
 			nivel = $('#usuarioNivel').text(),
-			sucursal = $('#usuariosucursal').text();
+			sucursal = $('#usuariosucursal').text(),
+			nac = $('#fechaNac').text(),
+			ing = $('#fechaIng').text();
 
 			var link = '/Application/modificarUsuario?nombre='+nombre+'&apellido='+apellido+
-						'&nivel='+nivel+'&sucursal='+sucursal+'&id=${user.id}';
+						'&nivel='+nivel+'&sucursal='+sucursal+'&id=${user.id}'+'&nac='+nac+'&ing='+ing;
 			$.get(link,function(){
+				console.log(link);
 				alert("Modificado exitosamente");
 			});
 

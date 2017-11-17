@@ -29,7 +29,7 @@ public class Application extends Controller {
 
     public static void index() {
     	//List<Usuario> usuarios = Usuario.find("nivel.numero > ?1",getUser().nivel.numero).fetch();//Solo menores
-    	List<Usuario> usuarios = Usuario.findAll();//todos
+    	List<Usuario> usuarios = Usuario.find("nivel.numero > 1").fetch();//todos
     	render(usuarios);
     }
     
@@ -47,10 +47,12 @@ public class Application extends Controller {
     }
         
     
-    public static void newUser(String nombre, String apellido, String password, int nivel, Long sucursal)
+    public static void newUser(String nombre, String apellido, String password, int nivel, Long sucursal, String nac, String ing)
     {
-    	Usuario user = new Usuario(nombre,apellido,password,nivel,sucursal);    	
-    	render(user);
+    	java.sql.Date fechaNac = java.sql.Date.valueOf(nac);
+    	java.sql.Date fechaIng = java.sql.Date.valueOf(ing);
+    	Usuario user = new Usuario(nombre,apellido,password,nivel,sucursal,fechaNac,fechaIng);    	
+    	render(user.id);
     }
     
     public static void removeUser(Long id)
@@ -91,13 +93,17 @@ public class Application extends Controller {
     }
     
         
-    public static void modificarUsuario(Long id,String nombre, String apellido, String nivel, String sucursal)
+    public static void modificarUsuario(Long id,String nombre, String apellido, String nivel, String sucursal,String nac, String ing)
     {
+    	java.sql.Date fechaNac = java.sql.Date.valueOf(nac);
+    	java.sql.Date fechaIng = java.sql.Date.valueOf(ing);
     	Usuario user = Usuario.findById(id);
     	user.nombre = nombre;
     	user.apellido = apellido;
     	user.nivel = Nivel.find("nombre = ?1", nivel).first();
     	user.sucursal = Sucursal.find("nombre = ?1",sucursal).first();
+    	user.fecNac = fechaNac;
+    	user.fecIng = fechaIng;
     	user.save();
     	renderJSON(user);    	
     }

@@ -15,11 +15,13 @@ public class Usuario extends Model{
 	public Sucursal sucursal;
 	@OneToOne
 	public Nivel nivel;
+	public java.sql.Date fecNac;
+	public java.sql.Date fecIng;
 	
 	public Usuario() {}
 	
 	
-	public Usuario(String nombre, String apellido, String password, int nivel, Long sucursal)
+	public Usuario(String nombre, String apellido, String password, int nivel, Long sucursal, java.sql.Date fechaNac, java.sql.Date fechaIng)
 	{
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -28,6 +30,8 @@ public class Usuario extends Model{
 		String user = (this.nombre.substring(0, 2)+this.apellido.substring(0, 3)).toLowerCase()+((int)(Math.random()*100));
 		this.username = user.replace(" ","");
 		this.sucursal = Sucursal.findById(sucursal); 
+		this.fecNac = fechaNac;
+		this.fecIng = fechaIng;
 		this.save();
 	}
 	

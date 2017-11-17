@@ -27,7 +27,7 @@ CREATE TABLE `Nivel` (
   `nombre` varchar(255) DEFAULT NULL,
   `numero` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `Nivel` (
 
 LOCK TABLES `Nivel` WRITE;
 /*!40000 ALTER TABLE `Nivel` DISABLE KEYS */;
-INSERT INTO `Nivel` VALUES (1,'Admin',1);
+INSERT INTO `Nivel` VALUES (1,'Empleado',2),(2,'Administrador',1);
 /*!40000 ALTER TABLE `Nivel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +84,7 @@ CREATE TABLE `Sucursal` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `Sucursal` (
 
 LOCK TABLES `Sucursal` WRITE;
 /*!40000 ALTER TABLE `Sucursal` DISABLE KEYS */;
-INSERT INTO `Sucursal` VALUES (1,'Chihuahua');
+INSERT INTO `Sucursal` VALUES (1,'Chihuahua'),(2,'Juárez'),(3,'Tijuana'),(4,'Guaymas'),(5,'Hermosillo'),(6,'Mexicali'),(7,'Nogales');
 /*!40000 ALTER TABLE `Sucursal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,6 +112,8 @@ CREATE TABLE `Usuario` (
   `username` varchar(255) DEFAULT NULL,
   `nivel_id` bigint(20) DEFAULT NULL,
   `sucursal_id` bigint(20) DEFAULT NULL,
+  `fecIng` date DEFAULT NULL,
+  `fecNac` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_87kkgmk1jw5ogcawkaq222jlx` (`nivel_id`),
   KEY `FK_31siymi69kvwav48vabsii35m` (`sucursal_id`),
@@ -126,7 +128,7 @@ CREATE TABLE `Usuario` (
 
 LOCK TABLES `Usuario` WRITE;
 /*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
-INSERT INTO `Usuario` VALUES (1,'Administrador','','827ccb0eea8a706c4c34a16891f84e7b','admin',1,1);
+INSERT INTO `Usuario` VALUES (1,'Chihuahua','Administrador','827ccb0eea8a706c4c34a16891f84e7b','admin',2,1,'2017-11-17','2017-11-17');
 /*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -139,4 +141,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-16 21:56:48
+-- Dump completed on 2017-11-17  1:33:45
