@@ -41,4 +41,9 @@ public class Usuario extends Model{
 		this.save();		
 	}
 	
+	public String toString()
+	{
+		return this.username+" "+this.nombre+" "+this.apellido+" "+this.sucursal.nombre;
+	}
+	
 }

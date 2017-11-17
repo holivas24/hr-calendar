@@ -52,7 +52,8 @@ public class Application extends Controller {
     	java.sql.Date fechaNac = java.sql.Date.valueOf(nac);
     	java.sql.Date fechaIng = java.sql.Date.valueOf(ing);
     	Usuario user = new Usuario(nombre,apellido,password,nivel,sucursal,fechaNac,fechaIng);    	
-    	render(user.id);
+    	System.out.println(user.toString());
+    	render(user);
     }
     
     public static void removeUser(Long id)
