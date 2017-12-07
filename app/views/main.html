@@ -1,17 +1,71 @@
-<!DOCTYPE html>
-
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="${_response_encoding}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        #{get 'moreStyles' /}
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-    </head>
-    <body>
+<head>
+    <title>HR Calendar</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Styles -->
+    <link rel="stylesheet" href="/public/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/public/bootstrap/css/jquery.dataTables.min.css"> 
+    <link rel="stylesheet" href="/public/pace/corner.css">
+    <link rel="stylesheet" type="text/css" href="/public/stylesheets/custom.css">
+
+    <!-- Scripts-->
+    <script src="/public/pace/pace.min.js"></script>
+    <script src="/public/bootstrap/js/jquery-1.11.3.min.js"></script>
+    <script src="/public/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/public/bootstrap/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+           
+        });
+    </script>
+
+</head>
+<body>
+<!--Navbar -->
+<div class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+   <a class="navbar-brand" href="#">HR Calendar</a>
+   
+    </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                <a href="#">Inicio</a>
+                    
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Opciones<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Organigrama</a></li>
+                        <li><a href="#">Politicas de la empresa</a></li>
+                        <li><a href="#">Ayuda</a></li>
+                    </ul>
+                </li>-->
+                <li style="float: right !important;">
+                    <a href="/Login/index">Entrar</a>
+                </li>
+            </ul>
+        </div>      
+    </div>
+  </div>
+<!--End Navbar -->
+<div class="container-fluid">
+    <div id="results" class="display row">
+        <!--El contenido va aqui -->
         #{doLayout /}
-        
-        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-        #{get 'moreScripts' /}
-    </body>
+    </div>
+    
+</div>
+</body>
 </html>

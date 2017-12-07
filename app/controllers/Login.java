@@ -48,7 +48,7 @@ public class Login extends Controller{
 		switch(getUser().nivel.numero)
 		{
 		case 1://Superusuario
-			Application.index();
+			Admin.index();
 			break;
 //		case 2://Administrador global
 //			AdminGlobal.index();

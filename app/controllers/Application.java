@@ -1,149 +1,56 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
-import java.util.*;
+
 import models.*;
+import play.mvc.Controller;
 
-public class Application extends Controller {
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+public class Application extends Controller{
 	
-	
-	@Before
-	static void verificar()
+	public static void index()
 	{
-		String usuario = session.get("usuario");
-		if(usuario == null)
-		{
-			Login.index();
+		List<UserToRender> entrance = new ArrayList<UserToRender>();
+		List<UserToRender> birth = new ArrayList<UserToRender>();
+				
+		//get current date time with Calendar()
+		Calendar cal = Calendar.getInstance();
+		int mes = cal.get(Calendar.MONTH);
+		int dia = cal.getMaximum(Calendar.DAY_OF_MONTH);
+		List<Usuario> usuarios = Usuario.find("month(fecIng) = ?1 and nivel.numero > ?2", mes,1).fetch();
+		
+		
+		for(Usuario ing:usuarios){
+			UserToRender temp = new UserToRender(ing);
+			if(temp.years > 0)
+				entrance.add(temp);
 		}
-		if(getUser().nivel.numero!=1)
-			Login.redirect();
+		usuarios = Usuario.find("month(fecNac) = ?1 and nivel.numero > ?2", mes,1).fetch();
+		
+		for(Usuario bd:usuarios)
+			birth.add(new UserToRender(bd));
+		
+		
+		render(entrance, birth, mes,dia);
 	}
 	
-	public static Usuario getUser()
+	public static void imagenes()
 	{
-		Long id = Long.parseLong(session.get("usuario"));
-    	Usuario user = Usuario.findById(id);
-    	return user;
-	}
+		List<String> imagenes = new ArrayList<String>();
+		File folder = new File("/home/holivas/workspace/hr-calendar/public/slides");
+		File[] listOfFiles = folder.listFiles();
 
-    public static void index() {
-    	//List<Usuario> usuarios = Usuario.find("nivel.numero > ?1",getUser().nivel.numero).fetch();//Solo menores
-    	List<Usuario> usuarios = Usuario.find("nivel.numero > 1").fetch();//todos
-    	render(usuarios);
-    }
-    
-    public static void crearUsuario()
-    {
-    	List<Sucursal> sucursales = Sucursal.findAll();
-    	List<Nivel> niveles = Nivel.findAll();
-    	render(sucursales,niveles);
-    }
-    
-    public static void usuariosPuntos()
-    {
-    	List<Usuario> usuarios = Usuario.find("nivel.numero = ?1",5).fetch();
-    	render(usuarios);    	
-    }
-        
-    
-    public static void newUser(String nombre, String apellido, String password, int nivel, Long sucursal, String nac, String ing)
-    {
-    	java.sql.Date fechaNac = java.sql.Date.valueOf(nac);
-    	java.sql.Date fechaIng = java.sql.Date.valueOf(ing);
-    	Usuario user = new Usuario(nombre,apellido,password,nivel,sucursal,fechaNac,fechaIng);    	
-    	System.out.println(user.toString());
-    	render(user);
-    }
-    
-    public static void removeUser(Long id)
-    {
-    	Usuario user = Usuario.findById(id);
-    	render(user);
-    	
-    }    
-    
-    public static void eliminarUsuario(Long id)
-    {
-    	Usuario user = Usuario.findById(id);
-    	List<Registros> reg = Registros.find("hero.id = ?1",id).fetch();
-    	for(Registros r:reg)
-    	{
-    		r.delete();
-    	}
-    	user.delete();
-    	renderJSON(user);
-    }
-    
-    public static void newsucursal(String nombre)
-    {
-    	Sucursal sucursal = new Sucursal(nombre);
-    	renderJSON(sucursal);
-    }
-    
-    public static void newLevel(String nombre, int numero)
-    {
-    	Nivel nivel = new Nivel(nombre, numero);
-    	renderJSON(nivel);
-    }
-    
-    public static void editarUsuario(Long id)
-    {
-    	Usuario user = Usuario.findById(id);
-    	render(user);
-    }
-    
-        
-    public static void modificarUsuario(Long id,String nombre, String apellido, String nivel, String sucursal,String nac, String ing)
-    {
-    	java.sql.Date fechaNac = java.sql.Date.valueOf(nac);
-    	java.sql.Date fechaIng = java.sql.Date.valueOf(ing);
-    	Usuario user = Usuario.findById(id);
-    	user.nombre = nombre;
-    	user.apellido = apellido;
-    	user.nivel = Nivel.find("nombre = ?1", nivel).first();
-    	user.sucursal = Sucursal.find("nombre = ?1",sucursal).first();
-    	user.fecNac = fechaNac;
-    	user.fecIng = fechaIng;
-    	user.save();
-    	renderJSON(user);    	
-    }
-    
-    public static void cambiarPass(Long id, String newpass)
-    {
-    	Usuario user = Usuario.findById(id);
-    	user.cambiarContrasena(newpass);    	
-    	
-    }
-    
-    public static void editarPuntos(Long id)
-    {
-    	Usuario user = Usuario.findById(id);
-    	render(user);
-    }
-    
-    public static void registros()
-    {
-    	List<Registros> registros = Registros.find("activo = ?1",true).fetch();;
-    	render(registros);
-    	
-    }
-    
-    public static void detalleRegistro(Long id)
-    {
-    	Registros registro = Registros.findById(id);
-    	render (registro);
-    }
-    
-    public static void removeRegister(Long id)
-    {
-    	Registros registro = Registros.findById(id);
-    	render(registro);
-    }
-    
-    public static void autoEditar()
-    {
-    	
-    	editarUsuario(getUser().id);
-    }
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		      if (listOfFiles[i].isFile()) {
+		        imagenes.add(listOfFiles[i].getName());
+		      } else if (listOfFiles[i].isDirectory()) {
+		        
+		      }
+		    }
+		    
+	    renderJSON(imagenes);
+	}
 }

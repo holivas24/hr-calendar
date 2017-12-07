@@ -1,0 +1,14 @@
+.title{
+    text-align:center;
+}
+
+.center {
+    margin: auto;
+    width: 70%;;
+    padding: 10px;
+}
+
+.encabezado{
+	background: black;
+	color: white;
+}
