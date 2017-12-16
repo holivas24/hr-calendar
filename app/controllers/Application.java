@@ -10,7 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Application extends Controller{
-	
+	private static final String ruta = "/home/holivas/workspace/hr-calendar/public/";
+
 	public static void index()
 	{
 		List<UserToRender> entrance = new ArrayList<UserToRender>();
@@ -18,9 +19,9 @@ public class Application extends Controller{
 				
 		//get current date time with Calendar()
 		Calendar cal = Calendar.getInstance();
-		int mes = cal.get(Calendar.MONTH);
+		int mes = cal.get(Calendar.MONTH)+1;
 		int dia = cal.getMaximum(Calendar.DAY_OF_MONTH);
-		List<Usuario> usuarios = Usuario.find("month(fecIng) = ?1 and nivel.numero > ?2", mes,1).fetch();
+		List<Usuario> usuarios = Usuario.find("month(fecIng) = ?1 and nivel.numero > ?2 order by day(fecIng) asc", mes,1).fetch();
 		
 		
 		for(Usuario ing:usuarios){
@@ -28,7 +29,7 @@ public class Application extends Controller{
 			if(temp.years > 0)
 				entrance.add(temp);
 		}
-		usuarios = Usuario.find("month(fecNac) = ?1 and nivel.numero > ?2", mes,1).fetch();
+		usuarios = Usuario.find("month(fecNac) = ?1 and nivel.numero > ?2 order by day(fecNac) asc", mes,1).fetch();
 		
 		for(Usuario bd:usuarios)
 			birth.add(new UserToRender(bd));
@@ -40,7 +41,7 @@ public class Application extends Controller{
 	public static void imagenes()
 	{
 		List<String> imagenes = new ArrayList<String>();
-		File folder = new File("/home/holivas/workspace/hr-calendar/public/slides");
+		File folder = new File(ruta+"slides");
 		File[] listOfFiles = folder.listFiles();
 
 		    for (int i = 0; i < listOfFiles.length; i++) {
@@ -52,5 +53,24 @@ public class Application extends Controller{
 		    }
 		    
 	    renderJSON(imagenes);
+	}
+	
+	public static void organigrama()
+	{
+		
+		List<String> imagenes = new ArrayList<String>();
+		File folder = new File(ruta+"organigrama");
+		File[] listOfFiles = folder.listFiles();
+
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		      if (listOfFiles[i].isFile()) {
+		        imagenes.add(listOfFiles[i].getName());
+		        System.out.println(listOfFiles[i].getName());
+		      } else if (listOfFiles[i].isDirectory()) {
+		        
+		      }
+		    }
+		    Collections.sort(imagenes);
+		render(imagenes);
 	}
 }

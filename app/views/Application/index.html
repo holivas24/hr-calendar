@@ -38,7 +38,7 @@
     <h3>Cumpleaños del mes</h3>
     <table class="table">
         <tr>
-            <th>Dia</th>
+            <th>Día</th>
             <th>Nombre</th>
         </tr>
         #{list birth, as:'birth'}
@@ -53,11 +53,13 @@
     <h3>Aniversarios del mes</h3>
     <table class="table">
         <tr>
+            <th>Día</th>
             <th>Nombre</th>
             <th>Antigüedad(años)</th>
         </tr>
         #{list entrance, as:'entrance'}
         <tr>
+            <td>${entrance.dayOfInt}</td>
             <td>${entrance.usuario.nombre} ${entrance.usuario.apellido}</td>
             <td>${entrance.years}</td>
         </tr>

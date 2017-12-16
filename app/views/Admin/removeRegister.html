@@ -9,19 +9,19 @@
 <div class="container">
 
   <a class="btn btn-lg btn-danger" onClick="eliminarUsuario()" href="#">Eliminar registro</a>
-  <a class="btn btn-lg btn-success" href="/Application/detalleRegistro?id=${registro.id}">Volver a detalles del registro</a> 
+  <a class="btn btn-lg btn-success" href="/Admin/detalleRegistro?id=${registro.id}">Volver a detalles del registro</a> 
   
 </div>
 </center>
 <script>
 	function eliminarUsuario()
 	{
-		$.get('/Application/eliminarRegistro?id=${registro.id}',function(response)
+		$.get('/Admin/eliminarRegistro?id=${registro.id}',function(response)
 			{
 				alert("Se eliminado el registro "+response.id+" del heroe "+response.hero.nombre+" "+response.hero.apellido+" y se han restado "+response.cantidad+" puntos");
 			});
 
-		window.location ="/Application/registros";
+		window.location ="/Admin/registros";
 	}
 
 </script>

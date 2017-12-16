@@ -9,19 +9,19 @@
 <div class="container">
 
   <a class="btn btn-lg btn-danger" onClick="eliminarUsuario()" href="#">Eliminar usuario</a>
-  <a class="btn btn-lg btn-success" href="/Application/editarUsuario?id=${user.id}">Volver a editar usuario</a> 
+  <a class="btn btn-lg btn-success" href="/Admin/editarUsuario?id=${user.id}">Volver a editar usuario</a> 
   
 </div>
 </center>
 <script>
 	function eliminarUsuario()
 	{
-		$.get('/Application/eliminarUsuario?id=${user.id}',function(response)
+		$.get('/Admin/eliminarUsuario?id=${user.id}',function(response)
 			{
 				alert("Se eliminado el usuario "+response.nombre+" "+response.apellido);
 			});
 
-		window.location ="/Application/index";
+		window.location ="/Admin/index";
 	}
 
 </script>

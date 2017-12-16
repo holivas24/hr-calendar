@@ -9,19 +9,19 @@
 <div class="container">
 
   <a class="btn btn-lg btn-success" onClick="darPuntos()" href="#">Asignar puntos para esta fecha</a>
-  <a class="btn btn-lg btn-danger" href="/Application/usuariosPuntos">Volver a Asignar puntos</a> 
+  <a class="btn btn-lg btn-danger" href="/Admin/usuariosPuntos">Volver a Asignar puntos</a> 
   
 </div>
 </center>
 <script>
 	function darPuntos()
 	{
-		$.get('/Application/sumarPuntos?id=${user.id}',function(response)
+		$.get('/Admin/sumarPuntos?id=${user.id}',function(response)
 			{
 				alert("Se han asignado 10 puntos correctamente al usuario "+response.nombre+" "+response.apellido+" para un total de "+response.puntos+" puntos");
 			});
 
-		window.location ="/Application/usuariosPuntos";
+		window.location ="/Admin/usuariosPuntos";
 	}
 
 </script>

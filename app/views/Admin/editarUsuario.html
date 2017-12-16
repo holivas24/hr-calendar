@@ -52,7 +52,7 @@
         <input type="password" id="newPass2" class="form-control">
         <br>
         <button onClick="cambiarContrasena()" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Cambiar Contraseña</button><br><br>
-        <a href="/Application/removeUser?id=${user.id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar usuario</a>
+        <a href="/Admin/removeUser?id=${user.id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar usuario</a>
     </div>
     </div>
 </div>
@@ -89,7 +89,7 @@
 			nac = $('#fechaNac').text(),
 			ing = $('#fechaIng').text();
 
-			var link = '/Application/modificarUsuario?nombre='+nombre+'&apellido='+apellido+
+			var link = '/Admin/modificarUsuario?nombre='+nombre+'&apellido='+apellido+
 						'&nivel='+nivel+'&sucursal='+sucursal+'&id=${user.id}'+'&nac='+nac+'&ing='+ing;
 			$.get(link,function(){
 				console.log(link);
@@ -106,7 +106,7 @@
             pass2 = $('#newPass2').val();
             if(pass1 == pass2)
             {
-                $.get('/Application/cambiarPass?id=${user.id}&newpass='+pass1,function(){
+                $.get('/Admin/cambiarPass?id=${user.id}&newpass='+pass1,function(){
                     
                 });
                 alert("Se ha cambiado contraseña");
