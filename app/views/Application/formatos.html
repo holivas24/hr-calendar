@@ -1,0 +1,7 @@
+#{extends 'main.html' /}
+<h2>Formatos</h2>
+<ul>
+#{list archivos, as:'archivo'}
+	<li><a href="/public/formatos/${archivo}" download>${archivo}</a></li>
+#{/list}
+</ul>

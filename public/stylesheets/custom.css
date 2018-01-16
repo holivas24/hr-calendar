@@ -12,3 +12,7 @@
 	background: black;
 	color: white;
 }
+
+.mayusculas{
+	text-transform: uppercase;
+}

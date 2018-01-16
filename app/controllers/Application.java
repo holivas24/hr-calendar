@@ -65,12 +65,45 @@ public class Application extends Controller{
 		    for (int i = 0; i < listOfFiles.length; i++) {
 		      if (listOfFiles[i].isFile()) {
 		        imagenes.add(listOfFiles[i].getName());
-		        System.out.println(listOfFiles[i].getName());
 		      } else if (listOfFiles[i].isDirectory()) {
 		        
 		      }
 		    }
 		    Collections.sort(imagenes);
 		render(imagenes);
+	}
+	
+	public static void politicas()
+	{
+		List<String> archivos = new ArrayList<String>();
+		File folder = new File(ruta+"politicas");
+		File[] listOfFiles = folder.listFiles();
+
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		      if (listOfFiles[i].isFile()) {
+		        archivos.add(listOfFiles[i].getName());
+		      } else if (listOfFiles[i].isDirectory()) {
+		        
+		      }
+		    }
+		    Collections.sort(archivos);
+		render(archivos);
+	}
+	
+	public static void formatos()
+	{
+		List<String> archivos = new ArrayList<String>();
+		File folder = new File(ruta+"formatos");
+		File[] listOfFiles = folder.listFiles();
+
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		      if (listOfFiles[i].isFile()) {
+		        archivos.add(listOfFiles[i].getName());
+		      } else if (listOfFiles[i].isDirectory()) {
+		        
+		      }
+		    }
+		    Collections.sort(archivos);
+		render(archivos);
 	}
 }

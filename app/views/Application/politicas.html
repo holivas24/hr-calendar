@@ -1,0 +1,7 @@
+#{extends 'main.html' /}
+<h2>Politicas</h2>
+<ul>
+#{list archivos, as:'archivo'}
+	<li><a href="/public/politicas/${archivo}" download>${archivo}</a></li>
+#{/list}
+</ul>
